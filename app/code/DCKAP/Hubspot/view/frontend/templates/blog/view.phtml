@@ -1,0 +1,43 @@
+<?php
+
+/**
+ * @var \DCKAP\Hubspot\Block\View $block
+ */
+ $_blog = $block->getDetaillog();
+ $subCategories = $block->getSubCategories();
+ $site_url = $block->getSiteUrl();
+?>
+<section class="inner-page">
+	<div class="container">	
+    <div class="row">
+    <?php if ($_blog && count($_blog)): ?>
+        <div class="left-content col-md-9">
+            <div class="post">
+                <img src="<?= $_blog['featured_image']?>" alt=" <?= $_blog['title']?>">
+                <div class="post-view-icon">
+                    <i class="porto-icon-calendar" style="padding-right:10px"></i> <?= $_blog['created_at']?>
+                    <i class="porto-icon-user" style="margin-left:30px;padding-right:10px"></i>By Star Sales
+                </div>
+                <h1 style="margin-top:30px;"> <?= $_blog['title']?></h1>
+                <?= $_blog['post_body']?>                
+            </div>
+            <div class="blog-back-btn">
+                <a href="<?= $site_url; ?>"><?= /* @escapeNotVerified */ __('Back') ?></a>
+            </div>
+        </div>
+    <?php endif ?>
+    <div class="sidebar col-md-3 pull-right blog-sidebar">
+        <div class="sidebar-widget">
+                <div class="sidebar-title">
+                    <h4>Product <span>Brochures</span></h4>
+                </div>
+                <ul class="sidebar-list">
+                    <?php foreach ($subCategories as $subCategory): ?>  
+                     <li><a href="<?= $subCategory->getUrl(); ?>"><?php echo $subCategory->getName(); ?></a></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        </div>
+    </div>
+   </div>
+ </section>

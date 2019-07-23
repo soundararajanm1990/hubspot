@@ -1,0 +1,57 @@
+<?php
+/**
+ * @var \DCKAP\Hubspot\Block\Blog $block
+ */
+ $_blogs = $block->getAllBlogs();
+ $site_url = $block->getSiteUrl();
+echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')
+->setBlockId('porto_block_4_top_block')->toHtml();
+$subCategories = $block->getSubCategories();
+?>
+<section class="inner-page blog-list-page">
+	<div class="container">	
+    <div class="row">
+    <?php if (isset($_blogs['blog']) && $_blogs['blog'] && count($_blogs['blog'])): ?>
+    <div class="left-content col-md-9">
+        <?php foreach ($_blogs['blog'] as $_blog): ?>    
+                <?php $_url = $block->getBackUrl($_blog['id']); ?>       
+                <div class="blog-post">
+                    <h2><a href="<?= $_url; ?>" title="<?= $_blog['title']; ?>"><?= $_blog['title']; ?></a></h2>
+                    <a class="blog-post-img" href="<?= $_url; ?>" title="<?= $_blog['title']; ?>"><img src="<?= $_blog['featured_image']; ?>" alt="<?= $_blog['title']; ?>"></a>
+                    <div class="blog-post-details">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <ul class="post-meta">
+                                    <li><i class="porto-icon-calendar" style="padding-right:10px;color:#969696;"></i><a style="cursor:default;" href="" title=""><?= $_blog['created_at']; ?></a></li>
+                                
+                                    <li><i class="porto-icon-user" style="padding-right:10px;color:#969696;"></i><a style="cursor:default;" href="" title=""><?= /* @escapeNotVerified */ __('Star Sales') ?></a></li>
+                                </ul>
+                            </div>
+                            <div class="col-sm-9">
+                                <div class="post-desc">					
+                                <?= $_blog['post_summary']; ?>
+                                    <a class="btn btn-primary" title="<?= $_blog['title']; ?>" href="<?= $_url; ?>"><?= /* @escapeNotVerified */ __('Read More') ?></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        <?php endforeach; ?>
+        
+    <?php endif ?>
+    </div>
+    <div class="sidebar col-md-3 pull-right">
+            <div class="sidebar-widget blog-sidebar">
+                <div class="sidebar-title">
+                    <h4>Product <span>Brochures</span></h4>
+                </div>
+                <ul class="sidebar-list">
+                    <?php foreach ($subCategories as $subCategory): ?>  
+                     <li><a href="<?= $subCategory->getUrl(); ?>"><?php echo $subCategory->getName(); ?></a></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        </div>
+   </div>
+    </div>
+ </section>

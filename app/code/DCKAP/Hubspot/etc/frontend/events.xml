@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">              
+    <event name="customer_register_success">
+        <observer name="customer_created" instance="DCKAP\Hubspot\Observer\CustomerCreated" />
+    </event>		   
+    <event name="checkout_cart_product_add_after">
+        <observer name="after_add_to_cart" instance="DCKAP\Hubspot\Observer\AfterCart" />
+    </event>	
+    <event name="sales_quote_remove_item">
+        <observer name="remove_item" instance="DCKAP\Hubspot\Observer\RemoveItem" />
+    </event>
+    <event name="checkout_onepage_controller_success_action">
+        <observer name="checkout_success_action" instance="DCKAP\Hubspot\Observer\CheckoutSuccess" />
+    </event>
+    <event name="checkout_cart_update_items_after">
+        <observer name="after_update_item" instance="DCKAP\Hubspot\Observer\CartUpdateItem" />
+    </event>
+    <event name="controller_action_postdispatch_newsletter_subscriber_new">
+        <observer name="newsletter_manage_save" instance="DCKAP\Hubspot\Observer\NewsletterSave" />
+    </event>
+    <event name="controller_action_postdispatch_newsletter_manage_save">
+        <observer name="newsletter_manage_save" instance="DCKAP\Hubspot\Observer\NewsletterSaveMyaccount" />
+    </event>
+</config>
